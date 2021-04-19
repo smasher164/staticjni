@@ -2,19 +2,19 @@ clean:
 	-rm *.class
 	-rm *.jar
 	-rm *.o
-	-rm helloworld
+	-rm *.a
+	-rm HelloWorld
 
 all:
-	javac HelloWorld.java
-	jar cfm HelloWorld.jar manifest.txt HelloWorld.class
-	cc -c -static -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -o libHelloWorld.o -fPIC HelloWorld.c
+	javac -cp . HelloWorld.java HelloWorldFeature.java
+	jar cfm HelloWorld.jar manifest.txt HelloWorld.class HelloWorldFeature.class
+	cc -c -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -o helloworld.o HelloWorld.c
+	ar rcs libHelloWorld.a helloworld.o
 	native-image \
-		-jar HelloWorld.jar \
-		-H:Name=helloworld \
-		-H:+ReportExceptionStackTraces \
-		-H:+StaticExecutableWithDynamicLibC \
-		-H:AdditionalLinkerOptions="/root/staticjni/libHelloWorld.o" \
-		--initialize-at-build-time \
-		--verbose \
 		--no-fallback \
-		--no-server
+		--no-server \
+		--verbose \
+		--initialize-at-build-time \
+		-H:+ReportExceptionStackTraces \
+		-jar HelloWorld.jar \
+		-H:CLibraryPath="/root/staticjni/"
