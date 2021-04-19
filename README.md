@@ -1,3 +1,3 @@
-# Statically-linked Native Image w/ JNI attempt
+# Statically-linked Native Image w/ JNI
 
 
