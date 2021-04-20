@@ -10,11 +10,4 @@ all:
 	jar cfm HelloWorld.jar manifest.txt HelloWorld.class NativeFeature.class
 	cc -c -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/darwin -o native.o Native.c
 	ar rcs libNative.a native.o
-	native-image \
-		--no-fallback \
-		--no-server \
-		--verbose \
-		--initialize-at-build-time \
-		-H:+ReportExceptionStackTraces \
-		-jar HelloWorld.jar \
-		-H:CLibraryPath="/Users/akhil/Projects/staticjni/"
+	native-image --no-fallback --initialize-at-build-time -jar HelloWorld.jar -H:CLibraryPath=.
