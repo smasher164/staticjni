@@ -6,10 +6,10 @@ clean:
 	-rm HelloWorld
 
 all:
-	javac -cp . HelloWorld.java HelloWorldFeature.java
-	jar cfm HelloWorld.jar manifest.txt HelloWorld.class HelloWorldFeature.class
-	cc -c -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux -o helloworld.o HelloWorld.c
-	ar rcs libHelloWorld.a helloworld.o
+	javac -cp . HelloWorld.java NativeFeature.java
+	jar cfm HelloWorld.jar manifest.txt HelloWorld.class NativeFeature.class
+	cc -c -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/darwin -o native.o Native.c
+	ar rcs libNative.a native.o
 	native-image \
 		--no-fallback \
 		--no-server \
@@ -17,4 +17,4 @@ all:
 		--initialize-at-build-time \
 		-H:+ReportExceptionStackTraces \
 		-jar HelloWorld.jar \
-		-H:CLibraryPath="/root/staticjni/"
+		-H:CLibraryPath="/Users/akhil/Projects/staticjni/"

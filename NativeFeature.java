@@ -6,13 +6,13 @@ import com.oracle.svm.hosted.c.NativeLibraries;
 import org.graalvm.nativeimage.hosted.Feature;
 
 @AutomaticFeature
-public class HelloWorldFeature implements Feature {
+public class NativeFeature implements Feature {
 
     @Override
     public void beforeAnalysis(BeforeAnalysisAccess access) {
-        NativeLibrarySupport.singleton().preregisterUninitializedBuiltinLibrary("HelloWorld");
+        NativeLibrarySupport.singleton().preregisterUninitializedBuiltinLibrary("Native");
         PlatformNativeLibrarySupport.singleton().addBuiltinPkgNativePrefix("HelloWorld");
         NativeLibraries nativeLibraries = ((FeatureImpl.BeforeAnalysisAccessImpl) access).getNativeLibraries();
-        nativeLibraries.addStaticJniLibrary("HelloWorld");
+        nativeLibraries.addStaticJniLibrary("Native");
     }
 }
