@@ -1,6 +1,6 @@
 #include <jni.h>
 #include <stdio.h>
-#include "Native.h"
+#include "HelloWorld.h"
 
 JNIEXPORT void JNICALL Java_HelloWorld_print
   (JNIEnv * env, jclass class) {
