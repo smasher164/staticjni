@@ -17,4 +17,4 @@
 4.
 	- Linux and MacOS: `ar rcs libNative.a native.o`
 	- Windows (msvc): `lib Native.obj`
-5. `native-image --no-fallback -jar HelloWorld.jar -H:CLibraryPath=.`
+5. `native-image -jar HelloWorld.jar -H:CLibraryPath=.`
